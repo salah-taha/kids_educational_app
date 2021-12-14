@@ -1,0 +1,10 @@
+{
+    "configurations": [
+    {
+        "name": "Kids Education",
+        "type": "dart",
+        "request": "launch",
+        "program": "lib/main.dart"
+    }
+    ]
+}
