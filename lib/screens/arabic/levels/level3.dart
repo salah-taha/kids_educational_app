@@ -1,40 +1,29 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:audioplayers/audioplayers.dart' hide AudioPlayer;
+import 'package:just_audio/just_audio.dart';
 import 'package:kids_education/constants.dart';
 import 'package:kids_education/widgets/background.dart';
-import 'package:kids_education/widgets/number_card.dart';
 import 'package:kids_education/widgets/top_section_card.dart';
 
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
-class NumbersLevel2 extends StatefulWidget {
-  const NumbersLevel2({Key? key}) : super(key: key);
+class ArabicLevel3 extends StatefulWidget {
+  const ArabicLevel3({Key? key}) : super(key: key);
 
   @override
-  State<NumbersLevel2> createState() => _NumbersLevel2State();
+  State<ArabicLevel3> createState() => _ArabicLevel3State();
 }
 
-class _NumbersLevel2State extends State<NumbersLevel2> {
+class _ArabicLevel3State extends State<ArabicLevel3> {
   final player = AudioCache();
-  late YoutubePlayerController _controller;
-  bool isPlaying = false;
+  final audioPlayer = AudioPlayer();
   int score = 0;
   late int num;
 
   @override
   void initState() {
     super.initState();
-    num = Random().nextInt(10);
-    _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(
-          "https://www.youtube.com/watch?v=hh8ROe-YPG8&list=PLqPC1f2DzsJWzHOFbPhQPLC9I5xTRw5dN&index=4")!,
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
-    );
+    num = Random().nextInt(28);
   }
 
   List<int> getRandomNumbers() {
@@ -50,6 +39,7 @@ class _NumbersLevel2State extends State<NumbersLevel2> {
   }
 
   void chooseAnswer(int answer) async {
+    audioPlayer.stop();
     if (answer == num) {
       score++;
       if (score >= 10) {
@@ -58,7 +48,7 @@ class _NumbersLevel2State extends State<NumbersLevel2> {
           context: context,
           builder: (context) => AlertDialog(
             title: const Text("أحسنت"),
-            content: const Text("انتهي المستوي الثاني"),
+            content: const Text("انتهي المستوي الثالث"),
             actions: <Widget>[
               TextButton(
                 child: const Text("حسنا"),
@@ -72,12 +62,12 @@ class _NumbersLevel2State extends State<NumbersLevel2> {
         );
         return;
       }
-      player.play('sounds/correct.mp3');
+      await player.play('sounds/correct.mp3');
 
       var temp = num;
-      num = Random().nextInt(10);
+      num = Random().nextInt(28);
       while (num == temp) {
-        num = Random().nextInt(10);
+        num = Random().nextInt(28);
       }
       setState(() {});
     } else {
@@ -87,7 +77,7 @@ class _NumbersLevel2State extends State<NumbersLevel2> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    audioPlayer.dispose();
     super.dispose();
   }
 
@@ -102,11 +92,6 @@ class _NumbersLevel2State extends State<NumbersLevel2> {
             child: ListView(
               padding: Constants.defaultPadding,
               children: [
-                YoutubePlayer(
-                  controller: _controller,
-                  showVideoProgressIndicator: true,
-                ),
-                const SizedBox(height: 36),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -118,22 +103,22 @@ class _NumbersLevel2State extends State<NumbersLevel2> {
                   ],
                 ),
                 // const SizedBox(height: 8),
-                GridView.count(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                  children: [
-                    for (int i = 0; i < 9; i++)
-                      GestureDetector(
-                        onTap: () {},
-                        child: GridCard(
-                          imagePath:
-                              i < num ? 'assets/alphabet/3-icon.png' : null,
-                        ),
-                      ),
-                  ],
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  padding: Constants.defaultPadding,
+                  decoration: BoxDecoration(
+                      color: Constants.darkBlueColor,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: GestureDetector(
+                    onTap: () {
+                      audioPlayer.setAsset('assets/alphabet/${num + 1}.mp3');
+                      audioPlayer.play();
+                    },
+                    child: Image.asset(
+                      'assets/alphabet/${num + 1}-icon.png',
+                      scale: 1.3,
+                    ),
+                  ),
                 ),
                 Row(
                   children: getRandomNumbers()
@@ -151,7 +136,7 @@ class _NumbersLevel2State extends State<NumbersLevel2> {
                                             BorderRadius.circular(16)),
                                     child: Center(
                                         child: Text(
-                                      '$e',
+                                      Constants.arabicLetters[e],
                                       style: Constants.largeTitleTextStyle,
                                     )))),
                           ))

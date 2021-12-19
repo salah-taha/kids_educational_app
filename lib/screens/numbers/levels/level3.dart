@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:kids_education/constants.dart';
@@ -17,7 +18,7 @@ class NumbersLevel3 extends StatefulWidget {
 }
 
 class _NumbersLevel3State extends State<NumbersLevel3> {
-  final player = AudioPlayer();
+  final player = AudioCache();
   late YoutubePlayerController _controller;
   bool isPlaying = false;
   int score = 0;
@@ -34,7 +35,7 @@ class _NumbersLevel3State extends State<NumbersLevel3> {
           "https://www.youtube.com/watch?v=V_rWpNQDpjM")!,
       flags: const YoutubePlayerFlags(
         autoPlay: false,
-        mute: true,
+        mute: false,
       ),
     );
   }
@@ -74,8 +75,7 @@ class _NumbersLevel3State extends State<NumbersLevel3> {
         );
         return;
       }
-      player.setAsset('assets/sounds/assets_win.mp3');
-      player.play();
+      player.play('sounds/correct.mp3');
       var temp = firstNum + secondNum;
       firstNum = Random().nextInt(5);
       secondNum = Random().nextInt(6);
@@ -85,14 +85,13 @@ class _NumbersLevel3State extends State<NumbersLevel3> {
       }
       setState(() {});
     } else {
-      player.setAsset('assets/sounds/wrong.mp3');
-      player.play();
+      player.play('sounds/wrong.mp3');
     }
   }
 
   @override
   void dispose() {
-    player.dispose();
+    _controller.dispose();
     super.dispose();
   }
 

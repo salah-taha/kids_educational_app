@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education/screens/arabic/arabic_screen.dart';
 import 'package:kids_education/screens/numbers/numbers_screen.dart';
+import 'package:kids_education/screens/stories/stories_screen.dart';
 import 'package:kids_education/widgets/home_card.dart';
 import 'package:kids_education/widgets/top_section_card.dart';
 
@@ -46,7 +47,13 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   HomeCard(
                     imagePath: 'assets/labels/2.png',
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const StoriesScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

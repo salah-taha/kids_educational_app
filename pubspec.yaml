@@ -16,6 +16,7 @@ dependencies:
   video_player: ^2.2.8
   just_audio: ^0.9.18
   youtube_player_flutter: ^8.0.0
+  audioplayers: ^0.20.1
 
 dev_dependencies:
   flutter_test:

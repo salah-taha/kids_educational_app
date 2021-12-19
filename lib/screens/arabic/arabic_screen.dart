@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education/screens/arabic/levels/level1.dart';
+import 'package:kids_education/screens/arabic/levels/level2.dart';
+import 'package:kids_education/screens/arabic/levels/level3.dart';
+import 'package:kids_education/screens/arabic/levels/level4.dart';
+import 'package:kids_education/screens/arabic/levels/level5.dart';
 import 'package:kids_education/screens/numbers/levels/level1.dart';
 import 'package:kids_education/widgets/game_levels_map.dart';
 import 'package:kids_education/widgets/top_section_card.dart';
@@ -22,10 +26,34 @@ class ArabicScreen extends StatelessWidget {
                   ),
                 );
               },
-              onLevel2Tap: () {},
-              onLevel3Tap: () {},
-              onLevel4Tap: () {},
-              onLevel5Tap: () {},
+              onLevel2Tap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const ArabicLevel2(),
+                  ),
+                );
+              },
+              onLevel3Tap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const ArabicLevel3(),
+                  ),
+                );
+              },
+              onLevel4Tap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const ArabicLevel4(),
+                  ),
+                );
+              },
+              onLevel5Tap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const ArabicLevel5(),
+                  ),
+                );
+              },
             ),
           ),
         ],
