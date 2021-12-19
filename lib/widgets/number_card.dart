@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education/constants.dart';
 
-class NumberCard extends StatelessWidget {
-  const NumberCard({Key? key, required this.number}) : super(key: key);
-  final int number;
+class GridCard extends StatelessWidget {
+  const GridCard({Key? key, this.imagePath}) : super(key: key);
+  final String? imagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +14,13 @@ class NumberCard extends StatelessWidget {
         border: Border.all(color: Constants.redColor),
         color: Constants.whiteColor,
       ),
-      child: Image.asset(
-        'assets/numbers/$number.png',
-        height: 60,
-        width: 60,
-      ),
+      child: imagePath == null
+          ? const SizedBox()
+          : Image.asset(
+              imagePath!,
+              height: 60,
+              width: 60,
+            ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:kids_education/screens/numbers_page.dart';
+import 'package:kids_education/screens/home_screen.dart';
+import 'package:kids_education/widgets/game_levels_map.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const NumbersPage(),
+      home: const HomeScreen(),
     );
   }
 }

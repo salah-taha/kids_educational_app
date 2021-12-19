@@ -31,4 +31,35 @@ class Constants {
   static const EdgeInsets verticalPadding = EdgeInsets.symmetric(vertical: 16);
   static const EdgeInsets horizontalPadding =
       EdgeInsets.symmetric(horizontal: 16);
+
+  static const List<String> arabicLetters = [
+    "ا",
+    "ب",
+    "ت",
+    "ث",
+    "ج",
+    "ح",
+    "خ",
+    "د",
+    "ذ",
+    "ر",
+    "ز",
+    "س",
+    "ش",
+    "ص",
+    "ض",
+    "ط",
+    "ظ",
+    "ع",
+    "غ",
+    "ف",
+    "ق",
+    "ك",
+    "ل",
+    "م",
+    "ن",
+    "ه",
+    "و",
+    "ي",
+  ];
 }

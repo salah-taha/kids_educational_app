@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kids_education/widgets/homcard.dart';
+import 'package:kids_education/screens/arabic/arabic_screen.dart';
+import 'package:kids_education/screens/numbers/numbers_screen.dart';
+import 'package:kids_education/widgets/home_card.dart';
+import 'package:kids_education/widgets/top_section_card.dart';
 
 import '../constants.dart';
 import '../widgets/background.dart';
-import '../widgets/number_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,35 +16,37 @@ class HomeScreen extends StatelessWidget {
       body: BackgroundWidget(
         child: Column(
           children: [
-            Container(
-              padding: Constants.defaultPadding.copyWith(top: 32),
-              color: Constants.darkBlueColor,
-              child: const Center(
-                child: Text(
-                  'تعلم واستمتع',
-                  style: Constants.largeTitleTextStyle,
-                ),
-              ),
-            ),
+            const TopSectionCard(),
             Expanded(
               child: ListView(
-                padding: Constants.horizontalPadding,
+                physics: const BouncingScrollPhysics(),
+                padding: Constants.defaultPadding,
                 children: [
-                  const SizedBox(height: 5),
-
-                  const SizedBox(height: 5),
-                  GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 1,
-                    mainAxisSpacing: 20,
-                    crossAxisSpacing: 20,
-                    children: [
-                      for (int i = 0; i <= 2; i++)
-                        HomeCard(
-                          number: i,
+                  HomeCard(
+                    imagePath: 'assets/labels/0.png',
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const ArabicScreen(),
                         ),
-                    ],
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  HomeCard(
+                    imagePath: 'assets/labels/1.png',
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const NumbersScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  HomeCard(
+                    imagePath: 'assets/labels/2.png',
+                    onPressed: () {},
                   ),
                 ],
               ),
